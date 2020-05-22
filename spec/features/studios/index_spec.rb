@@ -7,12 +7,12 @@ RSpec.describe "studios index page", type: :feature do
                            location: "123 Good St")
   studio2 = Studio.create(name: "Bad Movies",
                            location: "123 Bad st")
-  # @batman = @studio1.movies.create!(name: "Batman Begins",
-  #                                   creation_year: "2007",
-  #                                   genre: "Action")
-  # @marvel = @studio2.movies.create!(name: "Some Marvel Movie",
-  #                                   creation_year: "2007",
-  #                                   genre: "Action")
+  @batman = @studio1.movies.create!(name: "Batman Begins",
+                                    creation_year: "2007",
+                                    genre: "Action")
+  @marvel = @studio2.movies.create!(name: "Some Marvel Movie",
+                                    creation_year: "2007",
+                                    genre: "Action")
 
     visit "/studios"
 
@@ -20,5 +20,8 @@ RSpec.describe "studios index page", type: :feature do
     expect(page).to have_content("Location: #{studio1.location}")
     expect(page).to have_content(studio2.name)
     expect(page).to have_content("Location: #{studio2.location}")
+
+    expect(page).to have_content(batman.name)
+    expect(page).to have_content(marvel.name)
   end
 end
